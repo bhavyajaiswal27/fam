@@ -88,14 +88,6 @@ The **first EMA value** is initialized using the corresponding SMA.
 
 ---
 
-## Why Not Use Pandas Built-in Functions?
-
-Pandas provides:
-```python
-rolling().mean()
-ewm().mean()
-```
-
 These internally compute **the same mathematical result**.
 
 However, this project:
