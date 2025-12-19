@@ -56,6 +56,43 @@ This adjustment was **intentionally NOT applied** because:
 **The open may appear slightly off when compared to adjusted prices, but it is financially correct.**
 
 ---
+## Why Some SMA and EMA Values Are Missing (NaN)
+
+You may notice that the **initial rows** in the `SMA_10`, `SMA_20`, `EMA_10`, and `EMA_20` columns contain missing values (`NaN`).  
+This behavior is **expected and mathematically correct**.
+
+---
+
+### Simple Moving Average (SMA)
+
+An SMA of period **N** requires **N completed data points**.
+
+For example:
+- **SMA 10** needs the last **10 monthly closing prices**
+- **SMA 20** needs the last **20 monthly closing prices**
+
+Since the dataset contains **24 monthly rows**:
+- SMA 10 will be missing for the **first 9 months**
+- SMA 20 will be missing for the **first 19 months**
+
+This is because there is **insufficient historical data** to compute the average during those early months.
+
+---
+
+### Exponential Moving Average (EMA)
+
+Although EMA is a weighted moving average, it still needs an **initial starting value**.
+
+In this project:
+- The **first EMA value is initialized using the corresponding SMA**
+- EMA 10 starts only after SMA 10 becomes available
+- EMA 20 starts only after SMA 20 becomes available
+
+As a result:
+- EMA 10 is missing for the **first 9 months**
+- EMA 20 is missing for the **first 19 months**
+
+---
 
 ## Technical Indicator Calculations
 
